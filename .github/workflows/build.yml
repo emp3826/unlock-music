@@ -73,6 +73,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file_glob: true
-          file: ${{ matrix.build }}
+          asset_name: ${{ matrix.build }}
           tag: ${{ github.ref }}
 
