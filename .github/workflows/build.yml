@@ -66,12 +66,13 @@ jobs:
         with:
           name: extension
           path: ./dist
+      
       - name: Upload files to GitHub release
         uses: svenstaro/upload-release-action@v2
         if: github.event_name == 'release'
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file_glob: true
-          file: ./legacy-${{ steps.get_filename.outputs.ASSET_NAME }}*
+          file: ${{ matrix.build }}
           tag: ${{ github.ref }}
 
