@@ -69,4 +69,5 @@ jobs:
         if: github.event_name == 'release'
         with:
           asset_name: ${{ matrix.build }}
+          asset_path: ./dist
           upload_url: ${{ github.event.release.upload_url }}
