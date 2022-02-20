@@ -69,7 +69,7 @@ jobs:
           path: ./dist
       
       - name: Upload files to GitHub release
-        uses: svenstaro/upload-release-action@v2
+        uses: actions/upload-release-asset@v1
         if: github.event_name == 'release'
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
