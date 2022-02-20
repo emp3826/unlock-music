@@ -1,5 +1,3 @@
-# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-
 name: Test Build
 on:
   push:
@@ -66,18 +64,3 @@ jobs:
         with:
           name: extension
           path: ./dist
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-           tag_name: ${{ github.ref }}
-           release_name: Release ${{ github.ref }}
-   
-      - name: Upload files to GitHub release
-        uses: actions/upload-release-asset@v1
-        if: github.event_name == 'release'
-        with:
-          asset_name: ${{ matrix.build }}
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
