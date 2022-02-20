@@ -22,7 +22,6 @@ on:
       - "package-lock.json"
       - "package.json"
   release:
-    types: [ published ]
 
 jobs:
   build:
