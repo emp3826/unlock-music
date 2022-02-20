@@ -71,8 +71,5 @@ jobs:
         uses: actions/upload-release-asset@v1
         if: github.event_name == 'release'
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file_glob: true
           asset_name: ${{ matrix.build }}
-          tag: ${{ github.ref }}
 
