@@ -71,3 +71,4 @@ jobs:
           asset_name: ${{ matrix.build }}
           asset_path: ./dist
           upload_url: ${{ github.event.release.upload_url }}
+          asset_content_type: application/gzip
