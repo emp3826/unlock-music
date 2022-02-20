@@ -64,11 +64,3 @@ jobs:
         with:
           name: extension
           path: ./dist
-      - name: Upload files to GitHub release
-        uses: actions/upload-release-asset@v1
-        if: github.event_name == 'release'
-        with:
-          asset_name: ${{ matrix.build }}
-          asset_path: ./dist
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_content_type: application/gzip
