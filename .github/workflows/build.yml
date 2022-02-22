@@ -19,6 +19,7 @@ on:
       - "public/**/*"
       - "package-lock.json"
       - "package.json"
+  release:
 
 jobs:
   build:
