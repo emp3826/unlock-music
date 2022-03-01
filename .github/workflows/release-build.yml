@@ -54,72 +54,11 @@ jobs:
         id: date
         run: echo "::set-output name=date::$(date +'%Y/%m/%d')"
 
-      - name: Create a Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload files to GitHub release
+        uses: svenstaro/upload-release-action@v2
+        if: github.event_name == 'release'
         with:
-          tag_name: ${{ github.ref }}
-          release_name: "Build ${{ steps.date.outputs.date }}"
-          draft: false
-
-      - name: Upload Release Assets - legacy.tar.gz
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./legacy.tar.gz
-          asset_name: legacy.tar.gz
-          asset_content_type: application/gzip
-
-      - name: Upload Release Assets - legacy.zip
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./legacy.zip
-          asset_name: legacy.zip
-          asset_content_type: application/zip
-
-      - name: Upload Release Assets - modern.tar.gz
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./modern.tar.gz
-          asset_name: modern.tar.gz
-          asset_content_type: application/gzip
-
-      - name: Upload Release Assets - modern.zip
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./modern.zip
-          asset_name: modern.zip
-          asset_content_type: application/zip
-
-      - name: Upload Release Assets - extension.zip
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./extension.zip
-          asset_name: extension.zip
-          asset_content_type: application/zip
-
-      - name: Upload Release Assets - sha256sum.txt
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./sha256sum.txt
-          asset_name: sha256sum.txt
-          asset_content_type: text/plain
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file_glob: true
+          file: ./*.zip*
+          tag: ${{ github.ref }}
