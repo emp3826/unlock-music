@@ -37,22 +37,8 @@ jobs:
           zip -rJ9 ../extension.zip *
           cd ..
 
-      - name: Build Modern
-        env:
-          GZIP: "--best"
-        run: |
-          npm run build -- --modern
-          tar -czf modern.tar.gz -C ./dist .
-          cd dist
-          zip -rJ9 ../modern.zip *
-          cd ..
-
       - name: Checksum
         run: sha256sum *.tar.gz *.zip > sha256sum.txt
-
-      - name: Get current time
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y/%m/%d')"
 
       - name: Upload files to GitHub release
         uses: svenstaro/upload-release-action@v2
