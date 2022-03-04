@@ -32,7 +32,7 @@
     "jimp": "^0.16.1",
     "metaflac-js": "^1.0.5",
     "music-metadata": "7.12.2",
-    "music-metadata-browser": "2.2.7",
+    "music-metadata-browser": "2.5.5",
     "register-service-worker": "^1.7.2",
     "threads": "^1.6.5",
     "vue": "^2.6.14"
@@ -45,7 +45,7 @@
     "@vue/cli-plugin-typescript": "^4.5.13",
     "@vue/cli-service": "^4.5.13",
     "babel-plugin-component": "^1.1.1",
-    "jest": "^27.4.5",
+    "jest": "^27.5.1",
     "patch-package": "^6.4.7",
     "prettier": "2.5.1",
     "sass": "^1.49.9",
