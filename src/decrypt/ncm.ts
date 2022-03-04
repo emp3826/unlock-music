@@ -7,7 +7,7 @@ import {
     SniffAudioExt,
     WriteMetaToFlac,
     WriteMetaToMp3
-} from "@/decrypt/utils.ts";
+} from "@/decrypt/utils";
 import {parseBlob as metaParseBlob} from "music-metadata-browser";
 import jimp from 'jimp';
 
