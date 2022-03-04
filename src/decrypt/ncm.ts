@@ -216,7 +216,7 @@ class NcmDecrypt {
             ext: this.format,
             album: this.newMeta.album,
             picture: this.image?.url,
-            file: URL.createObjectURL(this.blob),
+            file: URL.createObjectURL(this.blob as Blob),
             blob: this.blob as Blob,
             mime: this.mime
         }
