@@ -1,6 +1,6 @@
 {
   "name": "unlock-music",
-  "version": "v1.11.0",
+  "version": "v1.11.1",
   "ext_build": 0,
   "updateInfo": "重写QMC解锁，完全支持.mflac*/.mgg*; 支持JOOX解锁",
   "license": "MIT",
