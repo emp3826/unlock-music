@@ -38,9 +38,6 @@ jobs:
           zip -rJ9 ../extension.zip *
           cd ..
 
-      - name: Checksum
-        run: sha256sum *.tar.gz *.zip > sha256sum.txt
-
       - name: Upload files to GitHub release
         uses: svenstaro/upload-release-action@v2
         if: github.event_name == 'release'
