@@ -1,7 +1,6 @@
 name: Build Release
 
 on:
-  push:
   release:
     types: [ published ]
 
