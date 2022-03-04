@@ -61,18 +61,18 @@ class NcmDecrypt {
     constructor(buf: ArrayBuffer, filename: string) {
         const prefix = new Uint8Array(buf, 0, 8)
         if (!BytesHasPrefix(prefix, MagicHeader)) throw Error("此ncm文件已损坏")
-        this.offset = 10
-        this.raw = buf
-        this.view = new DataView(buf)
-        this.filename = filename
+        offset = 10
+        raw = buf
+        view = new DataView(buf)
+        filename = filename
     }
 
     _getKeyData(): Uint8Array {
-        const keyLen = this.view.getUint32(this.offset, true);
-        this.offset += 4;
-        const cipherText = new Uint8Array(this.raw, this.offset, keyLen)
+        const keyLen = view.getUint32(offset, true);
+        offset += 4;
+        const cipherText = new Uint8Array(raw, offset, keyLen)
             .map(uint8 => uint8 ^ 0x64);
-        this.offset += keyLen;
+        offset += keyLen;
 
         const plainText = AES.decrypt(
             // @ts-ignore
@@ -93,7 +93,7 @@ class NcmDecrypt {
     }
 
     _getKeyBox(): Uint8Array {
-        const keyData = this._getKeyData()
+        const keyData = _getKeyData()
         const box = new Uint8Array(Array(256).keys());
 
         const keyDataLen = keyData.length;
@@ -114,13 +114,13 @@ class NcmDecrypt {
     }
 
     _getMetaData(): NcmMusicMeta {
-        const metaDataLen = this.view.getUint32(this.offset, true);
-        this.offset += 4;
+        const metaDataLen = view.getUint32(offset, true);
+        offset += 4;
         if (metaDataLen === 0) return {};
 
-        const cipherText = new Uint8Array(this.raw, this.offset, metaDataLen)
+        const cipherText = new Uint8Array(raw, offset, metaDataLen)
             .map(data => data ^ 0x63);
-        this.offset += metaDataLen;
+        offset += metaDataLen;
 
         WordArray.create()
         const plainText = AES.decrypt(
@@ -150,22 +150,22 @@ class NcmDecrypt {
     }
 
     _getAudio(keyBox: Uint8Array): Uint8Array {
-        this.offset += this.view.getUint32(this.offset + 5, true) + 13
-        const audioData = new Uint8Array(this.raw, this.offset)
+        offset += view.getUint32(offset + 5, true) + 13
+        const audioData = new Uint8Array(raw, offset)
         let lenAudioData = audioData.length
         for (let cur = 0; cur < lenAudioData; ++cur) audioData[cur] ^= keyBox[cur & 0xff]
         return audioData
     }
 
     async _buildMeta() {
-        if (!this.oriMeta) throw Error("invalid sequence")
+        if (!oriMeta) throw Error("invalid sequence")
 
-        const info = GetMetaFromFile(this.filename, this.oriMeta.musicName)
+        const info = GetMetaFromFile(filename, oriMeta.musicName)
 
         // build artists
         let artists: string[] = [];
-        if (!!this.oriMeta.artist) {
-            this.oriMeta.artist.forEach(arr => artists.push(<string>arr[0]));
+        if (!!oriMeta.artist) {
+            oriMeta.artist.forEach(arr => artists.push(<string>arr[0]));
         }
 
         if (artists.length === 0 && !!info.artist) {
@@ -173,67 +173,67 @@ class NcmDecrypt {
                 .map(val => val.trim()).filter(val => val != "");
         }
 
-        if (this.oriMeta.albumPic) try {
-            this.image = await GetImageFromURL(this.oriMeta.albumPic)
-            while (this.image && this.image.buffer.byteLength >= 1 << 24) {
-                let img = await jimp.read(Buffer.from(this.image.buffer))
+        if (oriMeta.albumPic) try {
+            image = await GetImageFromURL(oriMeta.albumPic)
+            while (image && image.buffer.byteLength >= 1 << 24) {
+                let img = await jimp.read(Buffer.from(image.buffer))
                 await img.resize(Math.round(img.getHeight() / 2), jimp.AUTO)
-                this.image.buffer = await img.getBufferAsync("image/jpeg")
+                image.buffer = await img.getBufferAsync("image/jpeg")
             }
         } catch (e) {
             console.log("get cover image failed", e)
         }
 
 
-        this.newMeta = {title: info.title, artists, album: this.oriMeta.album, picture: this.image?.buffer}
+        newMeta = {title: info.title, artists, album: oriMeta.album, picture: image?.buffer}
     }
 
     async _writeMeta() {
-        if (!this.audio || !this.newMeta) throw Error("invalid sequence")
+        if (!audio || !newMeta) throw Error("invalid sequence")
 
-        if (!this.blob) this.blob = new Blob([this.audio], {type: this.mime})
-        const ori = await metaParseBlob(this.blob);
+        if (!blob) blob = new Blob([audio], {type: mime})
+        const ori = await metaParseBlob(blob);
 
         let shouldWrite = !ori.common.album && !ori.common.artists && !ori.common.title
-        if (shouldWrite || this.newMeta.picture) {
-            if (this.format === "mp3") {
-                this.audio = WriteMetaToMp3(Buffer.from(this.audio), this.newMeta, ori)
-            } else if (this.format === "flac") {
-                this.audio = WriteMetaToFlac(Buffer.from(this.audio), this.newMeta, ori)
+        if (shouldWrite || newMeta.picture) {
+            if (format === "mp3") {
+                audio = WriteMetaToMp3(Buffer.from(audio), newMeta, ori)
+            } else if (format === "flac") {
+                audio = WriteMetaToFlac(Buffer.from(audio), newMeta, ori)
             } else {
-                console.info(`writing meta for ${this.format} is not being supported for now`)
+                console.info(`writing meta for ${format} is not being supported for now`)
                 return
             }
-            this.blob = new Blob([this.audio], {type: this.mime})
+            blob = new Blob([audio], {type: mime})
         }
     }
 
     gatherResult(): DecryptResult {
-        if (!this.newMeta) throw Error("bad sequence")
+        if (!newMeta) throw Error("bad sequence")
         return {
-            title: this.newMeta.title,
-            artist: this.newMeta.artists?.join("; "),
-            ext: this.format,
-            album: this.newMeta.album,
-            picture: this.image?.url,
-            file: URL.createObjectURL(this.blob),
-            blob: this.blob as Blob,
-            mime: this.mime
+            title: newMeta.title,
+            artist: newMeta.artists?.join("; "),
+            ext: format,
+            album: newMeta.album,
+            picture: image?.url,
+            file: URL.createObjectURL(blob),
+            blob: blob as Blob,
+            mime: mime
         }
     }
 
     async decrypt() {
-        const keyBox = this._getKeyBox()
-        this.oriMeta = this._getMetaData()
-        this.audio = this._getAudio(keyBox)
-        this.format = this.oriMeta.format || SniffAudioExt(this.audio)
-        this.mime = AudioMimeType[this.format]
-        await this._buildMeta()
+        const keyBox = _getKeyBox()
+        oriMeta = _getMetaData()
+        audio = _getAudio(keyBox)
+        format = oriMeta.format || SniffAudioExt(audio)
+        mime = AudioMimeType[format]
+        await _buildMeta()
         try {
-            await this._writeMeta()
+            await _writeMeta()
         } catch (e) {
             console.warn("write meta data failed", e)
         }
-        return this.gatherResult()
+        return gatherResult()
     }
 }
