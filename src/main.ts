@@ -24,8 +24,8 @@ import {
   Tooltip,
   Upload,
   MessageBox,
-} from 'element-ui';
-import 'element-ui/lib/theme-chalk/base.css';
+} from 'element-plus';
+import 'element-plus/lib/theme-chalk/base.css';
 
 createApp(App)
 .use(Link)
