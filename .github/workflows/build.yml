@@ -23,14 +23,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        build: [ legacy, modern ]
+        build: [ legacy ]
         include:
           - build: legacy
             BUILD_ARGS: ""
             BUILD_EXTENSION: true
-          - build: modern
-            BUILD_ARGS: "-- --modern"
-            BUILD_EXTENSION: false
     steps:
       - uses: actions/checkout@v3
 
