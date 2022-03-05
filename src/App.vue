@@ -25,11 +25,11 @@
 </template>
 
 <script>
-import FileSelector from '@/component/FileSelector';
-import PreviewTable from '@/component/PreviewTable';
-import config from '@/../package.json';
-import Home from '@/view/Home';
-import { checkUpdate } from '@/utils/api';
+import FileSelector from './component/FileSelector';
+import PreviewTable from './component/PreviewTable';
+import config from './../package.json';
+import Home from './view/Home';
+import { checkUpdate } from './utils/api';
 
 export default {
   name: 'app',
