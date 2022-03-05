@@ -25,7 +25,7 @@
     "@unlock-music/joox-crypto": "^0.0.1-R5",
     "base64-js": "^1.5.1",
     "browser-id3-writer": "^4.4.0",
-    "core-js": "^3.16.0",
+    "core-js": "^3.21.1",
     "crypto-js": "^4.1.1",
     "element-ui": "^2.15.5",
     "iconv-lite": "^0.6.3",
