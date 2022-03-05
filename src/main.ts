@@ -49,7 +49,3 @@ createApp(App)
 .use(ElTooltip)
 .use(ElProgress)
 .mount('#app')
-Vue.prototype.$notify = Notification;
-Vue.prototype.$confirm = MessageBox.confirm;
-
-Vue.config.productionTip = false;
