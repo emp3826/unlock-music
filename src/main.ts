@@ -28,26 +28,26 @@ import {
 import 'element-ui/lib/theme-chalk/base.css';
 
 createApp(App)
-.use(Link);
-.use(Image);
-.use(Button);
-.use(Dialog);
-.use(Form);
-.use(FormItem);
-.use(Input);
-.use(Table);
-.use(TableColumn);
-.use(Main);
-.use(Footer);
-.use(Container);
-.use(Icon);
-.use(Row);
-.use(Col);
-.use(Upload);
-.use(Checkbox);
-.use(Radio);
-.use(Tooltip);
-.use(Progress);
+.use(Link)
+.use(Image)
+.use(Button)
+.use(Dialog)
+.use(Form)
+.use(FormItem)
+.use(Input)
+.use(Table)
+.use(TableColumn)
+.use(Main)
+.use(Footer)
+.use(Container)
+.use(Icon)
+.use(Row)
+.use(Col)
+.use(Upload)
+.use(Checkbox)
+.use(Radio)
+.use(Tooltip)
+.use(Progress)
 Vue.prototype.$notify = Notification;
 Vue.prototype.$confirm = MessageBox.confirm;
 
