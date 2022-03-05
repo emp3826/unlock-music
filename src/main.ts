@@ -25,7 +25,7 @@ import {
   Upload,
   MessageBox,
 } from 'element-plus';
-import 'element-plus/lib/theme-chalk/base.css';
+import 'element-plus/packages/theme-chalk/src/index.scss';
 
 createApp(App)
 .use(Link)
