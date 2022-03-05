@@ -50,4 +50,4 @@ app.use(ElTooltip)
 app.use(ElProgress)
 app.mount('#app')
 app.config.globalProperties.$notify = ElNotification
-.prototype.$confirm = ElMessageBox.confirm
+app.config.globalProperties.$confirm = ElMessageBox.confirm
