@@ -48,10 +48,8 @@ createApp(App)
 .use(Radio)
 .use(Tooltip)
 .use(Progress)
+.mount('#app')
 Vue.prototype.$notify = Notification;
 Vue.prototype.$confirm = MessageBox.confirm;
 
 Vue.config.productionTip = false;
-new Vue({
-  render: (h) => h(App),
-}).$mount('#app');
