@@ -40,11 +40,11 @@
 </template>
 
 <script>
-import FileSelector from '@/component/FileSelector';
-import PreviewTable from '@/component/PreviewTable';
-import ConfigDialog from '@/component/ConfigDialog';
+import FileSelector from './component/FileSelector';
+import PreviewTable from './component/PreviewTable';
+import ConfigDialog from './component/ConfigDialog';
 
-import { DownloadBlobMusic, FilenamePolicy, FilenamePolicies, RemoveBlobMusic, DirectlyWriteFile } from '@/utils/utils';
+import { DownloadBlobMusic, FilenamePolicy, FilenamePolicies, RemoveBlobMusic, DirectlyWriteFile } from './utils/utils';
 
 export default {
   name: 'Home',
