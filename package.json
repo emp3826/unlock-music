@@ -48,7 +48,7 @@
     "jest": "^27.4.5",
     "patch-package": "^6.4.7",
     "prettier": "2.5.1",
-    "sass": "^1.38.1",
+    "sass": "^1.49.9",
     "sass-loader": "^10.2.0",
     "semver": "^7.3.5",
     "threads-plugin": "^1.4.0",
