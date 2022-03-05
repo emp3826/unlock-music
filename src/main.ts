@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import './registerServiceWorker';
 import {
-  Button,
+  ElButton,
   Checkbox,
   Col,
   Container,
@@ -25,7 +25,7 @@ import {
   Upload,
   MessageBox,
 } from 'element-plus';
-import 'element-plus/dist/index.css';
+import 'element-plus/lib/theme-chalk/base.css';
 
 createApp(App)
 .use(Link)
