@@ -27,6 +27,7 @@ import {
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/base.css';
 
+createApp(App)
 .use(Link);
 .use(Image);
 .use(Button);
@@ -49,7 +50,7 @@ import 'element-ui/lib/theme-chalk/base.css';
 .use(Progress);
 .prototype.$notify = Notification;
 .prototype.$confirm = MessageBox.confirm;
-
+.mount('#app')
 Vue.config.productionTip = false;
 new Vue({
   render: (h) => h(App),
