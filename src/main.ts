@@ -50,4 +50,4 @@ createApp(App)
 .use(ElProgress)
 .mount('#app')
 .prototype.$notify = Notification
-.prototype.$confirm = MessageBox.confirm
+.prototype.$confirm = ElMessageBox.confirm
