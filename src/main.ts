@@ -27,30 +27,29 @@ import {
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/base.css';
 
-createApp(App)
-.use(Link);
-.use(Image);
-.use(Button);
-.use(Dialog);
-.use(Form);
-.use(FormItem);
-.use(Input);
-.use(Table);
-.use(TableColumn);
-.use(Main);
-.use(Footer);
-.use(Container);
-.use(Icon);
-.use(Row);
-.use(Col);
-.use(Upload);
-.use(Checkbox);
-.use(Radio);
-.use(Tooltip);
-.use(Progress);
-.prototype.$notify = Notification;
-.prototype.$confirm = MessageBox.confirm;
-.mount('#app')
+Vue.use(Link);
+Vue.use(Image);
+Vue.use(Button);
+Vue.use(Dialog);
+Vue.use(Form);
+Vue.use(FormItem);
+Vue.use(Input);
+Vue.use(Table);
+Vue.use(TableColumn);
+Vue.use(Main);
+Vue.use(Footer);
+Vue.use(Container);
+Vue.use(Icon);
+Vue.use(Row);
+Vue.use(Col);
+Vue.use(Upload);
+Vue.use(Checkbox);
+Vue.use(Radio);
+Vue.use(Tooltip);
+Vue.use(Progress);
+Vue.prototype.$notify = Notification;
+Vue.prototype.$confirm = MessageBox.confirm;
+
 Vue.config.productionTip = false;
 new Vue({
   render: (h) => h(App),
