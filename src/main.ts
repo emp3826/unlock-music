@@ -49,5 +49,5 @@ createApp(App)
 .use(ElTooltip)
 .use(ElProgress)
 .mount('#app')
-.prototype.$notify = Notification
+.prototype.$notify = ElNotification
 .prototype.$confirm = ElMessageBox.confirm
