@@ -43,7 +43,7 @@ jobs:
         run: npm run build ${{ matrix.BUILD_ARGS }}
 
       - name: Publish artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.build }}
           path: ./dist
@@ -54,7 +54,7 @@ jobs:
 
       - name: Publish artifact - Extension
         if: ${{ matrix.BUILD_EXTENSION }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: extension
           path: ./dist
