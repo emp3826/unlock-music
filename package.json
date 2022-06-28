@@ -49,7 +49,7 @@
     "patch-package": "^6.4.7",
     "prettier": "2.5.1",
     "sass": "^1.49.9",
-    "sass-loader": "^10.2.0",
+    "sass-loader": "^13.0.2",
     "semver": "^7.3.5",
     "threads-plugin": "^1.4.0",
     "typescript": "^4.6.2",
